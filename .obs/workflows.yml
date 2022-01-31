@@ -22,7 +22,7 @@ workflow:
 #              - x86_64
 
     - configure_repositories:
-        project: OBS:Server:Unstable:CI
+        project: home:Admin
         repositories:
           - name: openSUSE_Tumbleweed
             target_project: openSUSE:Factory
