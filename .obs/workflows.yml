@@ -21,5 +21,14 @@ workflow:
             architectures:
               - x86_64
               - i586
+          - name: openSUSE_Tumbleweed_II
+            paths:
+              - target_project: pro2
+                target_repository: openSUSE_Tumbleweed
+              - target_project: pro2
+                target_repository: 15.3
+            architectures:
+              - x86_64
+              - i586
   filters:
     event: pull_request
