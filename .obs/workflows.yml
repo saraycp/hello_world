@@ -3,32 +3,32 @@ workflow:
     - branch_package:
         source_project: home:Admin
         source_package: hello_world
-        target_project: home:Admin:sandbox
-    - link_package:
-        source_project: home:Admin
-        source_package: hello_world
         target_project: home:Admin
+#    - link_package:
+#        source_project: home:Admin
+#        source_package: hello_world
+#        target_project: home:Admin
 
-    - configure_repositories:
-        project: home:Admin
-        repositories:
-          - name: openSUSE_Tumbleweed
-            paths:
-              - target_project: pro2
-                target_repository: openSUSE_Tumbleweed
-              - target_project: pro2
-                target_repository: 15.3
-            architectures:
-              - x86_64
-              - i586
-          - name: openSUSE_Tumbleweed_II
-            paths:
-              - target_project: pro2
-                target_repository: openSUSE_Tumbleweed
-              - target_project: pro2
-                target_repository: 15.3
-            architectures:
-              - x86_64
-              - i586
+#    - configure_repositories:
+#        project: home:Admin
+#        repositories:
+#          - name: openSUSE_Tumbleweed
+#            paths:
+#              - target_project: pro2
+#                target_repository: openSUSE_Tumbleweed
+#              - target_project: pro2
+#                target_repository: 15.3
+#            architectures:
+#              - x86_64
+#              - i586
+#          - name: openSUSE_Tumbleweed_II
+#            paths:
+#              - target_project: pro2
+#                target_repository: openSUSE_Tumbleweed
+#              - target_project: pro2
+#                target_repository: 15.3
+#            architectures:
+#              - x86_64
+#              - i586
   filters:
     event: pull_request
