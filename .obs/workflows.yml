@@ -30,5 +30,8 @@ workflow:
 #            architectures:
 #              - x86_64
 #              - i586
+    - rebuild_package:
+        project: home:Admin
+        package: ruby
   filters:
     event: pull_request
