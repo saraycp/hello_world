@@ -6,7 +6,7 @@ workflow:
 #        target_project: home:Admin
     - link_package:
         source_project: home:Admin
-        source_package: multibuild_package
+        source_package: multibuild_package:flavor2
         target_project: home:Admin
 
     - configure_repositories:
