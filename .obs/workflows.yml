@@ -6,7 +6,7 @@ workflow:
 #        target_project: home:Admin
     - link_package:
         source_project: home:Admin
-        source_package: hello_world
+        source_package: multibuild_package
         target_project: home:Admin
 
     - configure_repositories:
