@@ -1,9 +1,5 @@
 workflow:
   steps:
-#    - branch_package:
-#        source_project: home:Admin
-#        source_package: hello_world
-#        target_project: home:Admin
     - link_package:
         source_project: home:Admin
         source_package: hello_world
@@ -20,23 +16,5 @@ workflow:
                 target_repository: 15.3
             architectures:
               - x86_64
-#              - i586
-#          - name: openSUSE_Tumbleweed_II
-#            paths:
-#              - target_project: pro2
-#                target_repository: openSUSE_Tumbleweed
-#              - target_project: pro2
-#                target_repository: 15.3
-#            architectures:
-#              - x86_64
-#              - i586
-#    - rebuild_package:
-#        project: home:Admin
-#        package: ruby
-#    - trigger_services:
-#        project: home:Admin
-#        package: package_to_be_triggered
-#    - fake:
-#        project: home:Admin
   filters:
     event: pull_request
