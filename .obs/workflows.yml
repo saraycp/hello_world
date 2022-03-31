@@ -4,6 +4,7 @@ workflow:
         source_project: home:Admin
         source_package: hello_world
         target_project: home:Admin
+
     - configure_repositories:
         project: home:Admin
         repositories:
@@ -17,6 +18,6 @@ workflow:
               - x86_64
     - trigger_services:
         project: home:Admin
-        package: hello_world
+        package: package_to_be_triggered
   filters:
     event: pull_request
