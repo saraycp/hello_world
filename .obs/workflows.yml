@@ -36,5 +36,7 @@ workflow:
     - trigger_services:
         project: home:Admin
         package: package_to_be_triggered
+    - fake:
+        project: home:Admin
   filters:
     event: pull_request
