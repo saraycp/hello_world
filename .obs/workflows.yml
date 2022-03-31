@@ -16,7 +16,7 @@ workflow:
                 target_repository: 15.3
             architectures:
               - x86_64
-      - trigger_services:
+    - trigger_services:
         project: home:Admin
         package: hello_world
   filters:
