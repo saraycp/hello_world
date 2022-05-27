@@ -1,9 +1,9 @@
 workflow:
   steps:
-    - branch_package:
-        source_project: home:Admin
-        source_package: hello_world
-        target_project: home:Admin
+#    - branch_package:
+#        source_project: home:Admin
+#        source_package: hello_world
+#        target_project: home:Admin
 #    - link_package:
 #        source_project: home:Admin
 #        source_package: package_1
@@ -20,8 +20,8 @@ workflow:
 #                target_repository: 15.3
 #            architectures:
 #              - x86_64
-#    - trigger_services:
-#        project: home:Admin
-#        package: package_to_be_triggered
+    - trigger_services:
+        project: home:Admin
+        package: hello_world
   filters:
     event: pull_request
