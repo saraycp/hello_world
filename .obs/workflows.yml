@@ -22,6 +22,6 @@ workflow:
 #              - x86_64
     - trigger_services:
         project: home:Admin
-        package: sed
+        package: aperian
   filters:
     event: pull_request
