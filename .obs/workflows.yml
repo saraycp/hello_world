@@ -25,3 +25,12 @@ workflow:
         package: aperiam
   filters:
     event: pull_request
+
+workflow2:
+  steps:
+    - branch_package:
+        source_project: home:Admin
+        source_package: aperiam
+        target_project: home:Admin
+  filters:
+    event: tag_push
