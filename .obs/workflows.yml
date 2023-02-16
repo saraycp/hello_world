@@ -6,7 +6,7 @@
 #        target_project: home:SCabreraPadron:Sandbox
 #  filters:
 #    event: pull_request
-testbuild_branch_01:
+testbuild_branch_01_dup:
   steps:
     - branch_package:
         source_project: home:Admin
