@@ -17,14 +17,14 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: A - Group files that have changed
+      - name: Group files that have changed
         id: changed-files-yaml
         uses: tj-actions/changed-files@v39
         with:
           files_yaml: |
-            db:
+            migrations:
               - db/**
-            non_db:
+            not_migrations:
               - '!db/**'
             schema_migrations:
               - db/migrate/**
@@ -35,36 +35,36 @@ jobs:
             data_schema:
               - db/data_schema.rb
 
-      - name: B - List the files related to migrations that this PR changes
-        if: steps.changed-files-yaml.outputs.db_any_changed == 'true'
+      - name: List the files related to migrations that this PR changes
+        if: steps.changed-files-yaml.outputs.migrations_any_changed == 'true'
         run: |
           echo "Related to migrations:"
-          for file in ${{ steps.changed-files-yaml.outputs.db_all_changed_files }}; do
+          for file in ${{ steps.changed-files-yaml.outputs.migrations_all_changed_files }}; do
             echo "- $file"
           done
 
-      - name: C - List the files not related to migrations that this PR changes
-        if: steps.changed-files-yaml.outputs.non_db_any_changed == 'true'
+      - name: List the files not related to migrations that this PR changes
+        if: steps.changed-files-yaml.outputs.not_migrations_any_changed == 'true'
         run: |
           echo "Not related to migrations:"
-          for file in ${{ steps.changed-files-yaml.outputs.non_db_all_changed_files }}; do
+          for file in ${{ steps.changed-files-yaml.outputs.not_migrations_all_changed_files }}; do
             echo "- $file"
           done
 
-      - name: D - Check if the Pull Request contains code changes together with migrations
-        if: (steps.changed-files-yaml.outputs.db_any_changed == 'true') && (steps.changed-files-yaml.outputs.non_db_all_changed_files_count > 0)
+      - name: Check if the Pull Request contains code changes together with migrations
+        if: (steps.changed-files-yaml.outputs.migrations_any_changed == 'true') && (steps.changed-files-yaml.outputs.not_migrations_all_changed_files_count > 0)
         run: |
           echo "There are code changes together with migrations. Please split them into two Pull Requests"
           exit 1
 
-      - name: E - Do not miss schema changes
+      - name: Missing schema changes
         if: (steps.changed-files-yaml.outputs.schema_migrations_any_changed == 'true') && (steps.changed-files-yaml.outputs.schema_any_changed == 'false')
         run: |
           echo "You introduced some schema migration, please introduce the schema.rb changes as well"
           exit 1
 
-      - name: F - Do not miss data schema changes
-        if: (steps.changed-files-yaml.outputs.schema_data_migrations_any_changed == 'true') && (steps.changed-files-yaml.outputs.data_schema_any_changed == 'false')
+      - name: Missing data schema changes
+        if: (steps.changed-files-yaml.outputs.data_schema_migrations_any_changed == 'true') && (steps.changed-files-yaml.outputs.data_schema_any_changed == 'false')
         run: |
           echo "You introduced some data migrations, please introduce the data_schema.rb changes as well"
           exit 1
