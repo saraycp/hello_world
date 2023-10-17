@@ -64,7 +64,7 @@ jobs:
           exit 1
 
       - name: Missing data schema changes
-        if: (steps.changed-files-yaml.outputs.data_schema_migrations_any_changed == 'true') && (steps.changed-files-yaml.outputs.data_schema_any_changed == 'false')
+        if: (steps.changed-files-yaml.outputs.data_migrations_any_changed == 'true') && (steps.changed-files-yaml.outputs.data_schema_any_changed == 'false')
         run: |
           echo "You introduced some data migrations, please introduce the data_schema.rb changes as well"
           exit 1
