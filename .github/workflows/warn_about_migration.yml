@@ -1,0 +1,19 @@
+name: Warn that PR contains a migration
+
+on:
+  pull_request
+
+permissions:
+  contents: read
+jobs:
+  comment_on_pr:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    steps:
+      - name: Add Comment to PR
+        uses: thollander/actions-comment-pull-request@v2
+        with:
+          comment_tag: warn_migration
+          message: |
+            Hello world ! :wave:
