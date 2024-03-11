@@ -53,7 +53,7 @@ jobs:
         with:
           comment_tag: warn_missing_db_schema
           message: |
-            There is a db migration but not a db schema. Please commit it
+            :warning: There is a db migration but not a db schema. Please commit it
 
       - name: 'There is a data migration but not a data schema'
         uses: thollander/actions-comment-pull-request@v2
@@ -61,4 +61,4 @@ jobs:
         with:
           comment_tag: warn_missing_data_schema
           message: |
-            There is a data migration but not a data schema. Please commit it.
+            :warning: There is a data migration but not a data schema. Please commit it.
