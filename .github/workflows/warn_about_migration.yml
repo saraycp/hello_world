@@ -28,6 +28,8 @@ jobs:
             not_migrations:
               - '!src/api/db/migrate/**'
               - '!src/api/db/data/**'
+              - '!src/api/db/schema.rb'
+              - '!src/api/db/data_schema.rb'
             db_migrations:
               - src/api/db/migrate/**
             data_migrations:
