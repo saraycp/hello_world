@@ -21,20 +21,29 @@ jobs:
         uses: tj-actions/changed-files@v42
         with:
           files_yaml: |
+            schema_migrations:
+              - src/api/db/migrate/**
+            data_migrations:
+              - src/api/db/data/**
+            not_db_schema:
+              - src/api/db/schema.rb
+            not_data_schema:
+              - src/api/db/data_schema.rb
             migrations:
               - src/api/db/migrate/**
-              - src/api/db/schema.rb
               - src/api/db/data/**
-              - src/api/db/data_schema.rb
             not_migrations:
               - '!src/api/db/migrate/**'
-              - '!src/api/db/schema.rb'
               - '!src/api/db/data/**'
-              - '!src/api/db/data_schema.rb'
       - name: Check if the Pull Request contains code changes together with migrations
         if: (steps.changed-files-yaml.outputs.migrations_any_changed == 'true') && (steps.changed-files-yaml.outputs.not_migrations_all_changed_files_count > 0)
         run: |
           echo "This PR includes migration"
+
+      - name: 'There is a migration but not its schema'
+        if: (steps.changed-files-yaml.outputs.schema_migrations_any_changed == 'true') && (steps.changed-files-yaml.outputs.not_db_schema_all_changed_files_count > 0) || (steps.changed-files-yaml.outputs.data_migrations_any_changed == 'true') && (steps.changed-files-yaml.outputs.not_data_schema_all_changed_files_count > 0)
+        run: |
+          echo "There is a migration but not its schema. Please add it."
 
       - name: Add Comment to PR
         uses: thollander/actions-comment-pull-request@v2
