@@ -41,19 +41,8 @@ jobs:
         if: (steps.changed-files-yaml.outputs.migrations_any_changed == 'true') && (steps.changed-files-yaml.outputs.not_migrations_all_changed_files_count > 0)
         run: |
           echo "This PR includes migration"
-          
-      - name: 'There is a db migration but not a db schema'
-        if: (steps.changed-files-yaml.outputs.db_migrations_any_changed == 'true') && (steps.changed-files-yaml.outputs.db_schema_any_changed == 'false')
-        run: |
-          echo "There is a db migration but not a db schema. Please commit it."
 
-      - name: 'There is a data migration but not a data schema'
-        if: (steps.changed-files-yaml.outputs.data_migrations_any_changed == 'true') && (steps.changed-files-yaml.outputs.data_schema_any_changed == 'false')
-        run: |
-          echo "There is a data migration but not a data schema. Please commit it."
-
-
-      - name: Add Comment to PR
+      - name: Add comment warning about migrations
         uses: thollander/actions-comment-pull-request@v2
         if: (steps.changed-files-yaml.outputs.migrations_any_changed == 'true') && (steps.changed-files-yaml.outputs.not_migrations_all_changed_files_count > 0)
         with:
@@ -62,3 +51,17 @@ jobs:
             :warning: Please make sure the migration is shipped in an independent Pull Request. :warning:
 
             :heavy_check_mark: You can include schema changes, annotations and validations for consistency but :x: avoid committing other changes with it.
+          
+      - name: 'There is a db migration but not a db schema'
+        if: (steps.changed-files-yaml.outputs.db_migrations_any_changed == 'true') && (steps.changed-files-yaml.outputs.db_schema_any_changed == 'false')
+        with:
+          comment_tag: warn_missing_db_schema
+          message: |
+            There is a db migration but not a db schema. Please commit it
+
+      - name: 'There is a data migration but not a data schema'
+        if: (steps.changed-files-yaml.outputs.data_migrations_any_changed == 'true') && (steps.changed-files-yaml.outputs.data_schema_any_changed == 'false')
+        with:
+          comment_tag: warn_missing_data_schema
+          message: |
+            There is a data migration but not a data schema. Please commit it.
