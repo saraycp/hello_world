@@ -42,15 +42,15 @@ jobs:
         run: |
           echo "This PR includes migration"
           
-      - name: 'There is a db migration but not its schema'
+      - name: 'There is a db migration but not a db schema'
         if: (steps.changed-files-yaml.outputs.db_migrations_any_changed == 'true') && (steps.changed-files-yaml.outputs.db_schema_any_changed == 'false')
         run: |
-          echo "There is a db migration but not its schema. Please commit it."
+          echo "There is a db migration but not a db schema. Please commit it."
 
-      - name: 'There is a data migration but not its schema'
+      - name: 'There is a data migration but not a data schema'
         if: (steps.changed-files-yaml.outputs.data_migrations_any_changed == 'true') && (steps.changed-files-yaml.outputs.data_schema_any_changed == 'false')
         run: |
-          echo "There is a data migration but not its schema. Please commit it."
+          echo "There is a data migration but not a data schema. Please commit it."
 
 
       - name: Add Comment to PR
