@@ -1,19 +1,46 @@
 name: Warn that PR contains a migration
-
 on:
   pull_request
 
 permissions:
-  contents: read
+  contents: write
 jobs:
+  # TODO: check if there are migrations and warn in the comment.
   comment_on_pr:
     runs-on: ubuntu-latest
     permissions:
       pull-requests: write
     steps:
+
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Group files that have changed
+        id: changed-files-yaml
+        uses: tj-actions/changed-files@v42
+        with:
+          files_yaml: |
+            migrations:
+              - src/api/db/migrate/**
+              - src/api/db/schema.rb
+              - src/api/db/data/**
+              - src/api/db/data_schema.rb
+            not_migrations:
+              - '!src/api/db/migrate/**'
+              - '!src/api/db/schema.rb'
+              - '!src/api/db/data/**'
+              - '!src/api/db/data_schema.rb'
+      - name: Check if the Pull Request contains code changes together with migrations
+        if: (steps.changed-files-yaml.outputs.migrations_any_changed == 'true') && (steps.changed-files-yaml.outputs.not_migrations_all_changed_files_count > 0)
+        run: |
+          echo "This PR includes migration"
+          exit 1
+
       - name: Add Comment to PR
         uses: thollander/actions-comment-pull-request@v2
+        if: (steps.changed-files-yaml.outputs.migrations_any_changed == 'true') && (steps.changed-files-yaml.outputs.not_migrations_all_changed_files_count > 0)
         with:
           comment_tag: warn_migration
           message: |
-            Hello world ! :wave:
+            "Please, make sure the migration is shipped in an independent Pull Request. It can go with schema changes, annotations and validations for consistency but aviod commiting other changes with it."
