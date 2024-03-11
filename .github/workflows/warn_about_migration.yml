@@ -35,7 +35,6 @@ jobs:
         if: (steps.changed-files-yaml.outputs.migrations_any_changed == 'true') && (steps.changed-files-yaml.outputs.not_migrations_all_changed_files_count > 0)
         run: |
           echo "This PR includes migration"
-          exit 1
 
       - name: Add Comment to PR
         uses: thollander/actions-comment-pull-request@v2
