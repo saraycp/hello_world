@@ -48,6 +48,7 @@ jobs:
             :heavy_check_mark: You can include schema changes, annotations and validations for consistency but :x: avoid committing other changes with it.
           
       - name: 'There is a db migration but not a db schema'
+        uses: thollander/actions-comment-pull-request@v2
         if: (steps.changed-files-yaml.outputs.db_migrations_any_changed == 'true') && (steps.changed-files-yaml.outputs.db_schema_any_changed == 'false')
         with:
           comment_tag: warn_missing_db_schema
@@ -55,6 +56,7 @@ jobs:
             There is a db migration but not a db schema. Please commit it
 
       - name: 'There is a data migration but not a data schema'
+        uses: thollander/actions-comment-pull-request@v2
         if: (steps.changed-files-yaml.outputs.data_migrations_any_changed == 'true') && (steps.changed-files-yaml.outputs.data_schema_any_changed == 'false')
         with:
           comment_tag: warn_missing_data_schema
