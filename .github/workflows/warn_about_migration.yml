@@ -42,5 +42,6 @@ jobs:
         with:
           comment_tag: warn_migration
           message: |
-            :warning: Please, make sure the migration is shipped in an independent Pull Request.
+            :warning: Please, make sure the migration is shipped in an independent Pull Request. :warning:
+
             :heavy_check_mark: You can include schema changes, annotations and validations for consistency but :x: aviod commiting other changes with it.
