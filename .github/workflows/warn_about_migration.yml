@@ -37,11 +37,6 @@ jobs:
             data_schema:
               - src/api/db/data_schema.rb
 
-      - name: Check if the Pull Request contains code changes together with migrations
-        if: (steps.changed-files-yaml.outputs.migrations_any_changed == 'true') && (steps.changed-files-yaml.outputs.not_migrations_all_changed_files_count > 0)
-        run: |
-          echo "This PR includes migration"
-
       - name: Add comment warning about migrations
         uses: thollander/actions-comment-pull-request@v2
         if: (steps.changed-files-yaml.outputs.migrations_any_changed == 'true') && (steps.changed-files-yaml.outputs.not_migrations_all_changed_files_count > 0)
