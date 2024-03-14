@@ -1,4 +1,4 @@
-name: Set warnings about migration
+name: Set warnings about migrations
 
 on:
   pull_request
