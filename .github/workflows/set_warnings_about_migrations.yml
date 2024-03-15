@@ -68,5 +68,5 @@ jobs:
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: comments_texts_and_pr_number
+          name: comments_text_and_pr_number
           path: artifacts/
