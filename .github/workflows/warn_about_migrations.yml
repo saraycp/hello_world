@@ -1,7 +1,7 @@
 name: Warn about migrations
 on:
   workflow_run:
-    workflows: ['Set warnings about migration']
+    workflows: ['Set warnings about migrations']
     types:
       - completed
 permissions:
