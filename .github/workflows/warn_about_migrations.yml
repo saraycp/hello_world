@@ -12,6 +12,18 @@ jobs:
     permissions:
       pull-requests: write
     steps:
+      - name: TEST without artifacts
+        uses: thollander/actions-comment-pull-request@v2
+        with:
+          message: |
+            Hello world!
+      - name: TEST with artifacts
+        uses: thollander/actions-comment-pull-request@v2
+        with:
+          filePath: comments_text_and_pr_number/comment_test.txt
+          pr_number: ${{ env.pr_number }}
+          comment_tag: comment_test
+
       - name: Download artifacts
         uses: dawidd6/action-download-artifact@v3
         with:
