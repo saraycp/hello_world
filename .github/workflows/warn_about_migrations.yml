@@ -15,6 +15,7 @@ jobs:
       - name: TEST without artifacts
         uses: thollander/actions-comment-pull-request@v2
         with:
+          pr_number: ${{ env.pr_number }}
           message: |
             Hello world!
       - name: TEST with artifacts
