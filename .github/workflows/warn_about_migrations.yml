@@ -12,24 +12,17 @@ jobs:
     permissions:
       pull-requests: write
     steps:
-      # - name: TEST without artifacts
-      #   uses: thollander/actions-comment-pull-request@v2
-      #   with:
-      #     pr_number: ${{ env.pr_number }}
-      #     message: |
-      #       Hello world!
+      - name: Download artifacts
+        uses: dawidd6/action-download-artifact@v3
+        with:
+          workflow: ${{ github.event.workflow_run.workflow_id }}
+          workflow_conclusion: success
       - name: TEST with artifacts
         uses: thollander/actions-comment-pull-request@v2
         with:
           filePath: my_artifacts/comment_test.txt
           pr_number: ${{ env.pr_number }}
           comment_tag: comment_test
-
-      - name: Download artifacts
-        uses: dawidd6/action-download-artifact@v3
-        with:
-          workflow: ${{ github.event.workflow_run.workflow_id }}
-          workflow_conclusion: success
       - name: Fetch PR number from artifacts
         run: |
           echo "pr_number=$(cat my_artifacts/pr_number.txt)" >> $GITHUB_ENV
