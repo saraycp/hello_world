@@ -24,6 +24,7 @@ jobs:
 
       - name: Add comment about migration to PR
         uses: thollander/actions-comment-pull-request@v2
+        if: ${{ hashFiles('my_artifacts/comment_text_migrations.txt') != '' }}
         with:
           filePath: my_artifacts/comment_text_migrations.txt
           pr_number: ${{ env.pr_number }}
@@ -31,6 +32,7 @@ jobs:
 
       - name: Add comment about missing db schema to PR
         uses: thollander/actions-comment-pull-request@v2
+        if: ${{ hashFiles('my_artifacts/comment_text_db_schema.txt') != '' }}
         with:
           filePath: my_artifacts/comment_text_db_schema.txt
           pr_number: ${{ env.pr_number }}
@@ -38,6 +40,7 @@ jobs:
 
       - name: Add comment about missing data schema to PR
         uses: thollander/actions-comment-pull-request@v2
+        if: ${{ hashFiles('my_artifacts/comment_text_data_schema.txt') != '' }}
         with:
           filePath: my_artifacts/comment_text_data_schema.txt
           pr_number: ${{ env.pr_number }}
