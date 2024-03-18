@@ -21,25 +21,21 @@ jobs:
       - name: Fetch PR number from artifacts
         run: |
           echo "pr_number=$(cat my_artifacts/pr_number.txt)" >> $GITHUB_ENV
-      
-      - name: TEST with artifacts
-        uses: thollander/actions-comment-pull-request@v2
-        with:
-          filePath: my_artifacts/comment_test.txt
-          pr_number: ${{ env.pr_number }}
-          comment_tag: comment_test
+
       - name: Add comment about migration to PR
         uses: thollander/actions-comment-pull-request@v2
         with:
           filePath: my_artifacts/comment_text_migrations.txt
           pr_number: ${{ env.pr_number }}
           comment_tag: comment_about_migrations
+
       - name: Add comment about missing db schema to PR
         uses: thollander/actions-comment-pull-request@v2
         with:
           filePath: my_artifacts/comment_text_db_schema.txt
           pr_number: ${{ env.pr_number }}
           comment_tag: comment_about_db_schema
+
       - name: Add comment about missing data schema to PR
         uses: thollander/actions-comment-pull-request@v2
         with:
