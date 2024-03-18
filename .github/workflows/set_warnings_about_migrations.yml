@@ -40,11 +40,18 @@ jobs:
         run: |
           mkdir ./artifacts
           echo ${{ github.event.number }} > ./artifacts/pr_number.txt
+          
+      - name: Initialize files empty
+        run: |
+          echo "" > ./artifacts/comment_text_migrations.txt
+          echo "" > ./artifacts/comment_text_db_schema.txt
+          echo "" > ./artifacts/comment_text_data_schema.txt
 
       - name: 'Test'
         run: |
           COMMENT_TEXT=":warning: TEST."$'\n'
           echo "$COMMENT_TEXT" > ./artifacts/comment_test.txt
+
 
       - name: Store warning text about migrations
         if: (steps.changed-files-yaml.outputs.migrations_any_changed == 'true') && (steps.changed-files-yaml.outputs.not_migrations_all_changed_files_count > 0)
